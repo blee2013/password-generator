@@ -1,12 +1,8 @@
 // Assignment Code
-// Get references to the #generate element
-var generateBtn = document.querySelector('#generate');
-
-var aplha = "abcdefghijklmnopqrstuvwxyz"
-var alpahaUpper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+var alpha = "abcdefghijklmnopqrstuvwxyz"
+var alphaUpper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 var specCharacter = "!@#$%^&*()?|/<>.[],{}~"
-var number = "0123456789" 
-
+var number = "0123456789"
 
 //ask all the questions and returns the pw
 function createGeneratePassword() {
@@ -20,11 +16,11 @@ function createGeneratePassword() {
 if  (isNaN(length)=== true) {
   alert ("Your password length must be given as a number. Please try again.")
 }
-//   length of the password
-// 8 characters and no more than 128 characters 
+
+// 8 characters and no more than 128 characters, length of password
 if (length < 8 || length > 128) {
   alert( "Your password must have at least 8 characters, but no more than 128 characters. Please try again.");
-  return;
+  
 }
 
 //  lowercase, 
@@ -70,6 +66,8 @@ function makeRandom(characters) {
 
 //generate pw return it
 function generatePassword() {
+  
+  
 //options for password
   var options = createGeneratePassword();
 
@@ -88,8 +86,8 @@ if (options.containsAlpha) {
 
 // selects upper case to be in password
 if (options.containsAlphaUpper) {
-  opttionalAlphaUpper = opttionalCharacters.concat(alphaUpper);
-  includedCharacters.push(makeRandom(alpahaUpper));
+  optionalAlphaUpper = optionalCharacters.concat(alphaUpper);
+  includedCharacters.push(makeRandom(alphaUpper));
 }
 //selects number to be in password 
 if (options.containsnumber) {
@@ -116,6 +114,8 @@ for (var i = 0; i < includedCharacters.length; i++) {
 return outcome.join('');
 }
 
+// Get references to the #generate element
+var generateBtn = document.querySelector('#generate');
 
 // Write password to the #password input
 function writePassword() {
@@ -126,5 +126,6 @@ function writePassword() {
 
   passwordText.value = password;
 }
+
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
