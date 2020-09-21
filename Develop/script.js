@@ -1,14 +1,15 @@
 // Assignment Code
-var generateBtn = document.querySelector("#generate");
+// Get references to the #generate element
+var generateBtn = document.querySelector('#generate');
 
 var aplha = "abcdefghijklmnopqrstuvwxyz"
 var alpahaUpper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-var characters = "!@#$%^&*()?|/<>.[],{}~"
+var specCharacter = "!@#$%^&*()?|/<>.[],{}~"
 var number = "0123456789" 
 
 
 //ask all the questions and returns the pw
-function generatePassword(){
+function createGeneratePassword() {
 
 //How many characters would you like your password to contain (must be between 8 and 128 characters)? pswd length
   var length = parseInt(
@@ -36,32 +37,17 @@ var containsAlphaUpper = confirm("Please click OK to confirm including uppercase
 var containsNumber = confirm("Please click OK to confirm including number(s)");
 
 //special characters
-
-var containsCharacter = confirm("Please click OK to confirm including character(s)");
+var containsSpecCharacter = confirm("Please click OK to confirm including character(s)");
 
 //WHEN I answer each prompt, will not make pswd under this condition- all are false
 if (containsAlpha === false &&
     containsAlphaUpper  === false &&
     containsNumber === false &&
-    containsCharacter  === false )
+    containsSpecCharacter  === false )
     {
     alert("You must choose at least one of the character types. Please try again.");
     return;
     }
-
-// // switch (passwordOptionPrompt){
-//   case 1:
-//     containsAlpha;
-//   case 2:
-//     containsUpperAlpha;
-//   case 3:
-//   containsNumber;
-//   case 4:
-//   containsCharacter;
-//   break;
-//   }
-// }
-
 
 // what a person's options are for password
 var passwordOptions = {
@@ -69,45 +55,67 @@ var passwordOptions = {
   containsAlpha: containsAlpha, 
   containsAlphaUpper: containsAlphaUpper, 
   containsNumber: containsNumber, 
-  containgsCharacter: containsCharacter
+  containsSpecCharacter: containsSpecCharacter
 };
   return passwordOptions;
 
 }
-//THEN my input should be validated and at least one character type should be selected
-if ()
-
-//   generate pw return it
-
-  function generatePassword() {
-    var options = creategeneratePassword();
 // the pswd needs to be random
-function makeRandom(characters); {
-return characters[Mathfloor]
+function makeRandom(characters) {
+  var randomInput = Math.floor(Math.random() * characters.length);
+  var randomNext = characters[randomInput];
 
+  return randomNext;
 }
 
-//function for generate pswd
+//generate pw return it
 function generatePassword() {
-  //options for password
-  var options= getPasswordOptions();
+//options for password
+  var options = createGeneratePassword();
+
   //the outcome
   var outcome = [];
   //what are the optional characters
   var optionalCharacters = [];
   //what characters must be included
   var includedCharacters = [];
-}
 
-//create a loop for the password depending on length of pswd  to keep selecting from options untill length fulfilled
-
-//selects lower case to be in password 
+//THEN my input should be validated and at least one character type should be selected
 if (options.containsAlpha) {
-  optionalAlpha = optionalAlpha.concat(Alpha);
-  includedCharacters.push(make)
+  optionalCharacters = optionalCharacters.concat(alpha);
+  includedCharacters.push(makeRandom(alpha));
 }
 
+// selects upper case to be in password
+if (options.containsAlphaUpper) {
+  opttionalAlphaUpper = opttionalCharacters.concat(alphaUpper);
+  includedCharacters.push(makeRandom(alpahaUpper));
+}
+//selects number to be in password 
+if (options.containsnumber) {
+  optionalCharacters = optionalCharacters.concat(number);
+  includedCharacters.push(makeRandom(number));
+}
+//selects spec character to be in password 
+if (options.containsSpecCharacter) {
+  optionalCharacters = optionalCharacters.concat(specCharacter);
+  includedCharacters.push(makeRandom(specCharacter));
+}
+//create a loop for the password depending on length of pswd  to keep selecting from options untill length fulfilled
+for (var i = 0; i < options.length; i++) {
+  var optionalCharacters = makeRandom(optionalCharacters);
+
+  outcome.push(optionalCharacters);
+}
 //add in included character for return
+for (var i = 0; i < includedCharacters.length; i++) {
+  outcome[i] = includedCharacters[i];
+}
+
+// outcome strong
+return outcome.join('');
+}
+
 
 // Write password to the #password input
 function writePassword() {
@@ -118,6 +126,5 @@ function writePassword() {
 
   passwordText.value = password;
 }
-
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
